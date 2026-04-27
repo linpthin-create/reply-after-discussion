@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Serial AI Group Chat</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"], ["$", "$"]],
+          displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+        },
+        svg: { fontCache: "global" },
+        startup: { typeset: false }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Serial Web Debate</p>
+          <h1>专家群聊</h1>
+          <p>第一次发送的内容就是讨论议题。两个官网模型会扮演你设定的角色，在各自同一网页会话中轮流讨论。</p>
+        </div>
+
+        <section class="card">
+          <h2>模型连接</h2>
+          <div id="modelAInfo" class="model-card"></div>
+          <div id="modelBInfo" class="model-card"></div>
+          <p class="hint">具体模型版本通常在官网页面内选择；这里显示的是工具连接到哪个官网窗口。</p>
+        </section>
+
+        <section class="card settings">
+          <h2>讨论设置</h2>
+          <label>
+            开场方
+            <select id="openingSpeaker">
+              <option value="a">角色 A 先开场</option>
+              <option value="b">角色 B 先开场</option>
+            </select>
+          </label>
+          <label class="check">
+            <input id="temporaryChat" type="checkbox" />
+            <span>开始时新建官网对话</span>
+          </label>
+          <label>
+            对话轮数
+            <input id="maxTurns" type="number" min="1" max="30" value="6" />
+          </label>
+          <p class="hint">关闭时会复用当前官网会话；开启时会点击“新聊天”按钮，更接近临时讨论。</p>
+        </section>
+
+        <section class="card settings">
+          <h2>首次前缀 prompt</h2>
+          <label>
+            角色 A 预设
+            <select id="roleASelect"></select>
+          </label>
+          <input id="roleAName" placeholder="显示名，例如：研究员" />
+          <textarea id="roleAPrompt" class="role-input"></textarea>
+          <label>
+            角色 B 预设
+            <select id="roleBSelect"></select>
+          </label>
+          <input id="roleBName" placeholder="显示名，例如：评审专家" />
+          <textarea id="roleBPrompt" class="role-input"></textarea>
+          <p class="hint">这些前缀只在对应参与者第一次发言时发送。后续轮次只转发新增群聊消息。</p>
+        </section>
+
+        <section class="card settings">
+          <h2>总结 prompt</h2>
+          <textarea id="summaryPrompt" class="role-input"></textarea>
+          <p class="hint">最终由开场者使用该 prompt 总结。可使用 <code>{topic}</code> 作为原始议题占位符。</p>
+        </section>
+      </aside>
+
+      <section class="chat-shell">
+        <header class="chat-header">
+          <div>
+            <span id="runState" class="pill">未开始</span>
+            <h2 id="topicTitle">等待第一个议题</h2>
+          </div>
+          <div class="meta">
+            <span id="nextSpeaker">下一位：角色 A</span>
+            <span id="messageCount">0 条消息</span>
+          </div>
+        </header>
+
+        <section id="chat" class="chat-log" aria-label="群聊记录"></section>
+
+        <footer class="composer">
+          <textarea id="userMessage" placeholder="输入讨论议题或插话。第一次发送会创建议题；之后发送会作为用户观点进入群聊。"></textarea>
+          <div class="toolbar">
+            <p id="error" class="error"></p>
+            <div class="actions">
+              <button id="sendUserBtn">发送 / 开始</button>
+              <button id="runToSummaryBtn">一键讨论到总结</button>
+              <button id="newDiscussionBtn">开启新讨论</button>
+              <button id="stepBtn" disabled>下一位发言</button>
+              <button id="autoBtn" disabled>自动 4 轮</button>
+              <button id="endBtn" disabled>结束并总结</button>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

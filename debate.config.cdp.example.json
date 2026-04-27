@@ -1,0 +1,29 @@
+{
+  "rounds": 2,
+  "outputDir": "runs",
+  "models": {
+    "a": {
+      "id": "chatgpt",
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "connectOverCDP": "http://127.0.0.1:9222",
+      "responseTimeoutMs": 180000,
+      "waitForIdleMs": 15000,
+      "extraSettleMs": 3000,
+      "selectors": {
+        "promptBox": ["#prompt-textarea", "textarea", "[contenteditable='true']", "[role='textbox']"],
+        "answerBlocks": ["[data-message-author-role='assistant']"],
+        "answerMarkdown": ["[data-message-author-role='assistant'] .markdown", "[data-message-author-role='assistant'] [class*='markdown']"]
+      }
+    },
+    "b": {
+      "id": "gemini",
+      "label": "Gemini",
+      "url": "https://gemini.google.com/app",
+      "connectOverCDP": "http://127.0.0.1:9223",
+      "responseTimeoutMs": 180000,
+      "waitForIdleMs": 15000,
+      "extraSettleMs": 3000
+    }
+  }
+}

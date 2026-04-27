@@ -1,0 +1,34 @@
+{
+  "rounds": 2,
+  "outputDir": "runs",
+  "browser": {
+    "slowMoMs": 20
+  },
+  "models": {
+    "a": {
+      "id": "model-a",
+      "label": "Model A",
+      "url": "https://chatgpt.com/",
+      "browserProfileDir": ".debate-profiles/model-a",
+      "browserChannel": "chrome",
+      "responseTimeoutMs": 180000,
+      "waitForIdleMs": 15000,
+      "extraSettleMs": 3000,
+      "selectors": {
+        "promptBox": ["#prompt-textarea", "textarea", "[contenteditable='true']", "[role='textbox']"],
+        "answerBlocks": ["[data-message-author-role='assistant']"],
+        "answerMarkdown": ["[data-message-author-role='assistant'] .markdown", "[data-message-author-role='assistant'] [class*='markdown']"]
+      }
+    },
+    "b": {
+      "id": "model-b",
+      "label": "Model B",
+      "url": "https://gemini.google.com/app",
+      "browserProfileDir": ".debate-profiles/model-b",
+      "browserChannel": "chrome",
+      "responseTimeoutMs": 180000,
+      "waitForIdleMs": 15000,
+      "extraSettleMs": 3000
+    }
+  }
+}

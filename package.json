@@ -1,0 +1,29 @@
+{
+  "name": "serial-web-debate",
+  "version": "0.1.0",
+  "description": "Serial debate reasoning across official model web UIs.",
+  "type": "module",
+  "bin": {
+    "serial-web-debate": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "start": "tsx src/cli.ts",
+    "launch": "tsx src/cli.ts launch",
+    "browsers": "tsx src/cli.ts browsers",
+    "web": "tsx src/cli.ts web",
+    "debate": "tsx src/cli.ts debate",
+    "login": "tsx src/cli.ts login"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.44.0",
+    "playwright": "^1.44.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  }
+}

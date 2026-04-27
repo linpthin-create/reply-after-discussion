@@ -1,0 +1,8 @@
+node_modules/
+dist/
+debate.config.json
+.debate-profiles/
+.debate-cdp-profiles/
+runs/
+*.log
+.DS_Store
